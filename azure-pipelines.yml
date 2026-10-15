@@ -80,6 +80,19 @@ stages:
               downloadType: 'single'
               artifactName: 'drop'
               downloadPath: '$(System.DefaultWorkingDirectory)'
+
+          - task: AzureMysqlDeployment@2
+            inputs:
+              azureSubscription: 'azure'
+              ServerName: 'serverdb00089.database.windows.net'
+              DatabaseName: 'db00089'
+              SqlUsername: 'sreenija'
+              SqlPassword: 'Nija1234'
+              TaskNameSelector: 'SqlTaskFile'
+              SqlFile: 'scriptfortablecreation.sql'
+              IpDetectionMethod: 'AutoDetect'
+
+              
           - task: AzureRmWebAppDeployment@5
             inputs:
               ConnectionType: 'AzureRM'
