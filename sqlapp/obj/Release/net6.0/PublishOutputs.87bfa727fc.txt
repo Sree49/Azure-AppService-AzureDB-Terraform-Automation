@@ -1,0 +1,13 @@
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\sqlapp.exe
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\sqlapp.dll
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\sqlapp.deps.json
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\sqlapp.runtimeconfig.json
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\sqlapp.pdb
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\System.Data.SqlClient.dll
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm64\native\sni.dll
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\runtimes\win-x64\native\sni.dll
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\runtimes\win-x86\native\sni.dll
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\tmp\Sqlapp\sqlapp\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
