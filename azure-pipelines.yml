@@ -50,6 +50,12 @@ stages:
       inputs:
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
+    
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '''$(System.DefaultWorkingDirectory)'''
+        Contents: 'scriptfortablecreation.sql'
+        TargetFolder: '''$(Build.ArtifactStagingDirectory)'''
 
     - task: PublishBuildArtifacts@1
       inputs:
