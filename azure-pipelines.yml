@@ -53,9 +53,9 @@ stages:
     
     - task: CopyFiles@2
       inputs:
-        SourceFolder: '''$(System.DefaultWorkingDirectory)'''
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: 'scriptfortablecreation.sql'
-        TargetFolder: '''$(Build.ArtifactStagingDirectory)'''
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
     - task: PublishBuildArtifacts@1
       inputs:
