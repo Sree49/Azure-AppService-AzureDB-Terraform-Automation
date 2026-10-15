@@ -93,16 +93,26 @@ stages:
               IpDetectionMethod: 'AutoDetect'
 
               
+
           - task: AzureRmWebAppDeployment@5
             inputs:
               ConnectionType: 'AzureRM'
               azureSubscription: '$(serviceConnection)'
               appType: 'webApp'
               WebAppName: '$(webappname)'
-              ResourceGroupName: '$(RG_Name)'
               deployToSlotOrASE: true
+              ResourceGroupName: '$(RG_Name)'
               SlotName: 'test'
               packageForLinux: '$(System.DefaultWorkingDirectory)\drop\sqlapp.zip'
+              AppSettings: |
+                [
+                {
+                "name": "SQLConnection",
+                "value": "Server=tcp:serverdb00089.database.windows.net,1433;Initial Catalog=db00089;Persist Security Info=False;User ID=sreenija;Password=Nija1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+                "type": "SQLAzure",
+                "slotSetting": false
+                }
+                ]
 
   # Prod SLOT DEPLOYMENT
 # ==========================================
