@@ -81,16 +81,19 @@ stages:
               artifactName: 'drop'
               downloadPath: '$(System.DefaultWorkingDirectory)'
 
-          - task: AzureMysqlDeployment@2
+
+
+          - task: SqlAzureDacpacDeployment@1
             inputs:
               azureSubscription: 'azure'
+              AuthenticationType: 'server'
               ServerName: 'serverdb00089.database.windows.net'
               DatabaseName: 'db00089'
               SqlUsername: 'sreenija'
-              SqlPassword: 'Nija1234'
-              TaskNameSelector: 'SqlTaskFile'
-              SqlFile: 'scriptfortablecreation.sql'
-              IpDetectionMethod: 'AutoDetect'
+              SqlPassword: '$(SqlPassword)'
+              deployType: 'SqlTask'
+              SqlFile: '$(System.DefaultWorkingDirectory)/drop/scriptfortablecreation.sql'
+
 
               
 
