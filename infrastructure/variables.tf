@@ -15,14 +15,16 @@ variable "subnetname" {
   type    = string
   default = "SUBNET1"
 }
-variable "vnet_cidr" { type = string }
-variable "subnet_cidr" { type = string }
-variable "vm_size" { type = string }
-variable "node_count" { type = number }
-variable "app_image_tag" {
-  type    = string
-  default = "latest"
-}
+variable "vnet_cidr" {
+   type = string
+   default="10.0.0.0/16"
+    }
+variable "subnet_cidr" { 
+  type = string
+  default="10.0.1.0/24"
+   }
+
+
 variable "servername" {
   type    = string
   default = "serverdb00089"
