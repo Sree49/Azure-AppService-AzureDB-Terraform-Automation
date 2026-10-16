@@ -112,6 +112,16 @@ stages:
                   }
                 ]    
 
+          - task: AzureRmWebAppDeployment@5
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: '$(serviceConnection)'
+              appType: 'webApp'
+              WebAppName: '$(webappname)'
+              deployToSlotOrASE: true
+              ResourceGroupName: '$(RG_Name)'
+              SlotName: 'test'
+              packageForLinux: '$(System.DefaultWorkingDirectory)\drop\**\*.zip'
          
   # Prod SLOT DEPLOYMENT
 # ==========================================
