@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"resource_group","Source":"./modules/resource_group","Dir":"modules/resource_group"},{"Key":"sqldatabase","Source":"./modules/sqldatabase","Dir":"modules/sqldatabase"},{"Key":"vnet","Source":"./modules/vnet","Dir":"modules/vnet"}]}
