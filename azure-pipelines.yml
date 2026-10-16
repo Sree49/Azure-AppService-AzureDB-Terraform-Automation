@@ -43,12 +43,14 @@ stages:
             backendAzureRmStorageAccountName: 'tfstatefilestore1678'
             backendAzureRmContainerName: 'tfstate-container'
             backendAzureRmKey: 'terraform.tfstate'
+            environmentServiceNameAzureRM: 'azure'
 
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
             workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
             command: 'validate'
+            environmentServiceNameAzureRM: 'azure'
 
         - task: TerraformTask@5
           inputs:
@@ -64,6 +66,7 @@ stages:
             workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
             commandOptions: '-auto-approve'
             environmentServiceNameAzureRM: 'azure'
+
 - stage: Build
   displayName: Build
   dependsOn: Provision
