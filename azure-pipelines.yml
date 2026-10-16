@@ -12,12 +12,9 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  RG_Name: RG1
-  webappname: 'webapp00089'
-  serviceConnection: 'azure'
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+- group: variablegroup
+
+  
 
 
 stages:
@@ -93,9 +90,9 @@ stages:
             inputs:
               azureSubscription: 'azure'
               AuthenticationType: 'server'
-              ServerName: 'serverdb00089.database.windows.net'
-              DatabaseName: 'db00089'
-              SqlUsername: 'sreenija'
+              ServerName: '$(servername).database.windows.net'
+              DatabaseName: '$(dbname)'
+              SqlUsername: '$(dbusername)'
               SqlPassword: '$(SqlPassword)'
               deployType: 'SqlTask'
               SqlFile: '$(System.DefaultWorkingDirectory)/drop/scriptfortablecreation.sql'
@@ -117,7 +114,7 @@ stages:
                 [
                 {
                 "name": "SQLConnection",
-                "value": "Server=tcp:serverdb00089.database.windows.net,1433;Initial Catalog=db00089;Persist Security Info=False;User ID=sreenija;Password=Nija1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+                "value": "Server=tcp:$(servername).database.windows.net,1433;Initial Catalog=$(dbname);Persist Security Info=False;User ID=$(dbusername);Password=$(SqlPassword);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
                 "type": "SQLAzure",
                 "slotSetting": false
                 }
