@@ -22,9 +22,48 @@ stages:
 # ==========================================
 # BUILD
 # ==========================================
+
+- stage: Provision
+  displayName: Provision
+  jobs:
+    - job: Provision
+      displayName: Provision Appservice and DB
+      steps: 
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: 'azure'
+            backendAzureRmResourceGroupName: 'RG'
+            backendAzureRmStorageAccountName: 'tfstatefilestore1678'
+            backendAzureRmContainerName: 'tfstate-container'
+            backendAzureRmKey: 'terraform.tfstate'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            environmentServiceNameAzureRM: 'azure'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            commandOptions: '-auto-approve'
+            environmentServiceNameAzureRM: 'azure'
 - stage: Build
   displayName: Build
-
+  dependsOn: Provision
+  condition: succeeded()
   jobs:
   - job: Build
     displayName: Build Application
