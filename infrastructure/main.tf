@@ -7,7 +7,7 @@ module "resource_group" {
 module "vnet" {
   source              = "./modules/vnet"
   location            = module.resource_group.location
-  resource_group_name = module.resource_group.name
+  resource_group_name = module.resource_group.resource_group_name
   vnetname           = var.vnetname
   subnetname         = var.subnetname
   vnet_cidr           = var.vnet_cidr
@@ -17,7 +17,7 @@ module "vnet" {
 module "sqldatabase" {
   source              = "./modules/sqldatabase"
     location            = module.resource_group.location
-  resource_group_name = module.resource_group.name
+  resource_group_name = module.resource_group.resource_group_name
 servername= var.servername
 password= var.password
 dbname= var.dbname
