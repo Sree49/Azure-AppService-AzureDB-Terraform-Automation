@@ -6,9 +6,7 @@ terraform {
       version = "~> 3.100"
     }
   }
-  backend "azurerm" {
-    # Dynamically injected by the Azure DevOps pipeline at runtime
-  }
+ 
 
   
 }
