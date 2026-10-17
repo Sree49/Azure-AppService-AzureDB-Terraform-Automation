@@ -42,3 +42,12 @@ variable "password" {
   sensitive = true
   default   = "Nija1234"
 }
+variable "appservicename" {
+  type=string
+  default="webapp00089"
+}
+
+variable "appserviceplanname" {
+  type=string
+  default="webappplan"
+}
