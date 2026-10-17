@@ -33,31 +33,46 @@ stages:
           inputs:
             terraformVersion: '1.9.8'
 
+        - task: AzureCLI@2
+          inputs:
+            azureSubscription: '$(serviceConnection)'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+            scriptType: 'bash'
+            scriptLocation: 'inlineScript'
+            addSpnToEnvironment: true
+            inlineScript: |
+              export ARM_CLIENT_ID=$servicePrincipalId
+              export ARM_CLIENT_SECRET=$servicePrincipalKey
+              export ARM_TENANT_ID=$tenantId
+              export ARM_SUBSCRIPTION_ID=$subid
+              terraform init
+
+
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
             command: 'init'
-            backendServiceArm: 'azure'
+            backendServiceArm: '$(serviceConnection)'
             backendAzureRmResourceGroupName: 'RG'
             workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
             backendAzureRmStorageAccountName: 'tfstatefilestore1678'
             backendAzureRmContainerName: 'tfstate-container'
             backendAzureRmKey: 'terraform.tfstate'
-            environmentServiceNameAzureRM: 'azure'
+            environmentServiceNameAzureRM: '$(serviceConnection)'
 
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
             workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
             command: 'validate'
-            environmentServiceNameAzureRM: 'azure'
+            environmentServiceNameAzureRM: '$(serviceConnection)'
 
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
             workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
             command: 'plan'
-            environmentServiceNameAzureRM: 'azure'
+            environmentServiceNameAzureRM: '$(serviceConnection)'
 
         - task: TerraformTask@5
           inputs:
@@ -65,7 +80,7 @@ stages:
             command: 'apply'
             workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
             commandOptions: '-auto-approve'
-            environmentServiceNameAzureRM: 'azure'
+            environmentServiceNameAzureRM: '$(serviceConnection)'
 
 - stage: Build
   displayName: Build
@@ -134,7 +149,7 @@ stages:
 
           - task: SqlAzureDacpacDeployment@1
             inputs:
-              azureSubscription: 'azure'
+              azureSubscription: '$(serviceConnection)'
               AuthenticationType: 'server'
               ServerName: '$(servername).database.windows.net'
               DatabaseName: '$(dbname)'
