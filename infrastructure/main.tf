@@ -12,6 +12,7 @@ module "vnet" {
   subnetname         = var.subnetname
   vnet_cidr           = var.vnet_cidr
   subnet_cidr         = var.subnet_cidr
+  depends_on  = [module.resource_group]
 }
 
 module "sqldatabase" {
@@ -22,6 +23,7 @@ servername= var.servername
 password= var.password
 dbname= var.dbname
 adminuser= var.adminuser
+depends_on  = [module.resource_group]
 }
 
 module "appservice" {
@@ -30,6 +32,7 @@ module "appservice" {
   resource_group_name = module.resource_group.resource_group_name
   appserviceplanname=var.appserviceplanname
   appservicename=var.appservicename
+  depends_on  = [module.resource_group]
 }
 
 
