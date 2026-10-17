@@ -41,9 +41,10 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+            commandOptions: '-upgrade'
             backendServiceArm: '$(serviceConnection)'
             backendAzureRmResourceGroupName: 'RG'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
             backendAzureRmStorageAccountName: 'tfstatefilestore1678'
             backendAzureRmContainerName: 'tfstate-container'
             backendAzureRmKey: 'terraform.tfstate'
