@@ -45,6 +45,9 @@ stages:
               export ARM_CLIENT_SECRET=$servicePrincipalKey
               export ARM_TENANT_ID=$tenantId
               export ARM_SUBSCRIPTION_ID=$subid
+              terraform init
+              terraform plan
+              terraform apply -auto-approve
               
 
 
