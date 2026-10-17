@@ -50,9 +50,9 @@ stages:
 
               terraform validate
 
-              terraform plan -out=tfplan
+              terraform plan
 
-              terraform apply -auto-approve tfplan
+              terraform apply -auto-approve
             
               
 
