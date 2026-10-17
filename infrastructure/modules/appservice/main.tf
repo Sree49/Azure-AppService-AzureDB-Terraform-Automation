@@ -19,3 +19,16 @@ resource "azurerm_windows_web_app" "webapp" {
     }
   } 
 }
+
+resource "azurerm_windows_web_app_slot" "stagingslot" {
+  name           = "test"
+  app_service_id = azurerm_windows_web_app.webapp.id
+
+  site_config {
+    application_stack {
+      current_stack = "dotnet"
+      dotnet_version = "v10.0"
+    }
+  } 
+}
+
