@@ -24,5 +24,13 @@ dbname= var.dbname
 adminuser= var.adminuser
 }
 
+module "appservice" {
+  source= "./modules/appservice"
+  location            = module.resource_group.location
+  resource_group_name = module.resource_group.resource_group_name
+  appserviceplanname=var.appserviceplanname
+  appservicename=var.appservicename
+}
+
 
 
