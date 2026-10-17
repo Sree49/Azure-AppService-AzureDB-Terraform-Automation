@@ -158,9 +158,9 @@ stages:
                   {
                     "name": "SQLConnection",
                     "value": "Server=tcp:$(servername).database.windows.net,1433;Initial Catalog=$(dbname);Persist Security Info=False;User ID=$(dbusername);Password=$(SqlPassword);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
-                    "type": "SQLAzure"
+                    "type": "SQLAzure", "slotSetting": true
                   }
-                ]    
+                ]
 
           - task: AzureRmWebAppDeployment@5
             inputs:
@@ -188,6 +188,19 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: AzureAppServiceSettings@1
+            inputs:
+              azureSubscription: '$(serviceConnection)'
+              appName: '$(webappname)'
+              resourceGroupName: '$(RG_Name)'
+              connectionStrings: |
+                [
+                  {
+                    "name": "SQLConnection",
+                    "value": "Server=tcp:$(servername).database.windows.net,1433;Initial Catalog=$(dbname);Persist Security Info=False;User ID=$(dbusername);Password=$(SqlPassword);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+                    "type": "SQLAzure", "slotSetting": true
+                  }
+                ]
           - task: AzureAppServiceManage@0
             inputs:
               azureSubscription: '$(serviceConnection)'
