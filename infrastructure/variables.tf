@@ -1,7 +1,7 @@
 
 variable "location" {
   type    = string
-  default = "canadacentral"
+  default = "koreacentral"
 }
 variable "resource_group_name" {
   type    = string
