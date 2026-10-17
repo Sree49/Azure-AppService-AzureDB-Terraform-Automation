@@ -51,39 +51,6 @@ stages:
               
 
 
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            backendServiceArm: '$(serviceConnection)'
-            backendAzureRmResourceGroupName: 'RG'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-            backendAzureRmStorageAccountName: 'tfstatefilestore1678'
-            backendAzureRmContainerName: 'tfstate-container'
-            backendAzureRmKey: 'terraform.tfstate'
-            environmentServiceNameAzureRM: '$(serviceConnection)'
-
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-            command: 'validate'
-            environmentServiceNameAzureRM: '$(serviceConnection)'
-
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-            command: 'plan'
-            environmentServiceNameAzureRM: '$(serviceConnection)'
-
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'apply'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-            commandOptions: '-auto-approve'
-            environmentServiceNameAzureRM: '$(serviceConnection)'
 
 - stage: Build
   displayName: Build
