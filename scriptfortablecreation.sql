@@ -18,4 +18,6 @@ INSERT INTO Products(ProductID,ProductName,Quantity) VALUES (2,'Chairs',200)
 
 INSERT INTO Products(ProductID,ProductName,Quantity) VALUES (3,'Printer',300)
 
+INSERT INTO Products(ProductID,ProductName,Quantity) VALUES (4,'Books',600)
+
 END
