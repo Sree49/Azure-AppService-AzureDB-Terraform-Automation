@@ -31,32 +31,44 @@ stages:
       steps: 
         - task: TerraformInstaller@1
           inputs:
-            terraformVersion: '1.9.8'
+            terraformVersion: 'latest'
 
-        - task: AzureCLI@2
-          inputs:
-            azureSubscription: '$(serviceConnection)'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
-            scriptType: 'bash'
-            scriptLocation: 'inlineScript'
-            addSpnToEnvironment: true
-            inlineScript: |
-              export ARM_CLIENT_ID=$servicePrincipalId
-              export ARM_CLIENT_SECRET=$servicePrincipalKey
-              export ARM_TENANT_ID=$tenantId
-              export ARM_SUBSCRIPTION_ID=$subid
-
-              terraform init -reconfigure
-
-              terraform validate
-
-              terraform plan
-
-              terraform apply -auto-approve
-            
+       
               
 
 
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: '$(serviceConnection)'
+            backendAzureRmResourceGroupName: 'RG'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+            backendAzureRmStorageAccountName: 'tfstatefilestore1678'
+            backendAzureRmContainerName: 'tfstate-container'
+            backendAzureRmKey: 'terraform.tfstate'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+            command: 'validate'
+            environmentServiceNameAzureRM: '$(serviceConnection)'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+            command: 'plan'
+            environmentServiceNameAzureRM: '$(serviceConnection)'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure'
+            commandOptions: '-auto-approve'
+            environmentServiceNameAzureRM: '$(serviceConnection)'
 
 - stage: Build
   displayName: Build
